@@ -5,11 +5,8 @@ import CustomButton from '../components/CustomButton';
 import CustomInput from '../components/CustomInput';
 import styles from '../Style';
 
-
-
 const Login = (props) => {
 
-    // const auth = getAuth()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
@@ -24,17 +21,20 @@ const Login = (props) => {
     //         .catch(error => alert(error.message))
     // }
 
-    // const handleLogin = () => {
-
-    //     signInWithEmailAndPassword(auth, email, password)
-    //         .then(userCredentials => {
-    //             const user = userCredentials.user;
-    //             console.log('Login with', user.email);
-    //             // alert('Enter the Right E mail')
-    //             props.navigation.navigate('Registration', { email: email })
-    //         })
-    //         .catch(error => alert(error.message))
-    // }
+    const onLoginPress = () => {
+        try {
+            signInWithEmailAndPassword(auth, email, password)
+            .then(userCredentials => {
+                const user = userCredentials.user;
+                console.log('Login with', user.email);
+                // alert('Enter the Right E mail')
+                props.navigation.navigate('Dashboard', { email: email })
+            })
+            .catch(error => alert(error.message))
+        } catch {
+            alert('Email or Password is incorrect');
+        }
+    }
 
     return (
         <View >
@@ -57,8 +57,7 @@ const Login = (props) => {
                 secure={true}
             />
             <TouchableOpacity
-                onPress={() => props.navigation.navigate('ForgotPassword')}
-            >
+                onPress={() => props.navigation.navigate('ForgotPassword')} >
                 <Text
                     style={styles.placeLeft}
                 >
@@ -68,32 +67,21 @@ const Login = (props) => {
             {/* <View style={{ width: '90%', alignSelf: 'center', padding: 10 }}> */}
 
             <CustomButton
-                name='Login' />
+                name='Login'
+                onPress = {() => onSignupPressed()} />
 
             <TouchableOpacity
-                onPress={() => props.navigation.navigate('ForgotPassword')}
-            >
+                style={styles.text}
+                onPress={() => props.navigation.navigate('Signup')} >
                 <Text
-                    style={ styles.placeCenter}
+                    style={styles.placeCenter}
                 >
-                    Not a member? Register now.
+                    Not a member? Register now
                 </Text>
             </TouchableOpacity>
-            {/* </View> */}
-            {/* <TouchableOpacity
-                    onPress={() => {
-                        props.navigation.navigate("Forgot")
-                    }}
-                >
-                    <Text style={{
-                        fontStyle: 'italic', alignSelf: 'flex-end',
-                        fontSize: 20, margin: 20, color: 'red'
-                    }}>Forgot password </Text>
-                </TouchableOpacity> */}
-
         </View>
 
     )
-}
+};
 
 export default Login;

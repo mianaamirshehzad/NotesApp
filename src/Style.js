@@ -42,6 +42,43 @@ const styles = StyleSheet.create({
         // position: 'absolute',
         // bottom: -50
         
+    },
+    text: {
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    imageContainer: {
+        backgroundColor: 'blue',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 70,
+
+    },
+    image : {
+        width: 100,
+        height: 100,
+    },
+    bottomButton: {
+        backgroundColor: '#4b4df8',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 15, 
+        width: '95%',
+        alignSelf:'center',
+        padding: 15,
+        margin: 15,   
+    },
+    // titleText: {
+    //     fontSize: 22,
+    //     fontWeight: 'bold',
+    //     color: 'black'
+    // },
+    notesText: {
+        fontSize: 18,
+    },
+    viewContainer: {
+        backgroundColor: 'grey',
+        borderRadius: 15,
     }
 });
 

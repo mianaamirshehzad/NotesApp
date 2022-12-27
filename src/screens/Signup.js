@@ -1,111 +1,103 @@
-import { View, Text, Button, TextInput, Image, ScrollView, TouchableOpacity } from 'react-native'
+import { View, Text, Button, TextCustomInput, Image, ScrollView, TouchableOpacity } from 'react-native'
 import { useState } from 'react'
-import firebaseApp from '../firebase'
 import { addDoc, getFirestore, collection, getDoc, setDoc, doc } from 'firebase/firestore'
-import Input from '../Input'
-import { async } from '@firebase/util'
 
+import CustomInput from '../components/CustomInput';
+import styles from '../Style';
+import CustomButton from '../components/CustomButton';
 
 const Signup = (props) => {
     console.log(props.route.params.email)
 
-    const [fName, setfName] = useState('')
-    const [lName, setlName] = useState('')
-    const [Adress, setAdress] = useState('')
-    const [Age, setAge] = useState('')
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPass, setConfirmPass] = useState("");
+
+    // const [age, setAge] = useState('');
+
     const db = getFirestore(firebaseApp)
 
-    const onSubmitPressed = async () => {
+    const onSignupPressed = async () => {
         try {
             await setDoc(doc(db, "User", props.route.params.email), {
-                FirtName: fName,
-                LastName: lName,
-                Adress: Adress,
-                Age: Age,
-            }); alert('Success')
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                password: password,
+                confirmPass: confirmPass
+            });
+            alert('Success in Signup');
         } catch (e) {
-            console.log(e)
-            alert('Error')
+            console.log(e);
+            alert('Error');
+            alert(e);
         }
     }
 
-    const onGetProfilePressed = async () => {
-        // const db = getFirestore(firebaseApp)
-        try {
-            const docRef = doc(db, "User", props.route.params.email);
-            const meraVariable = await getDoc(docRef);
+    // const onGetProfilePressed = async () => {
+    //     // const db = getFirestore(firebaseApp)
+    //     try {
+    //         const docRef = doc(db, "User", props.route.params.email);
+    //         const meraVariable = await getDoc(docRef);
 
-            if (meraVariable.exists()) {
-                console.log("Document data:", meraVariable.data());
-            } else {
-                // doc.data() will be undefined in this case
-                console.log("No such document!");
-            }
-        } catch (e) {
-            console.log(e)
-        }
+    //         if (meraVariable.exists()) {
+    //             console.log("Document data:", meraVariable.data());
+    //         } else {
+    //             // doc.data() will be undefined in this case
+    //             console.log("No such document!");
+    //         }
+    //     } catch (e) {
+    //         console.log(e)
+    //     }
 
-    }
+    // }
 
 
 
     return (
-        <ScrollView>
-            <View>
+        <View>
+            <Text style={styles.titleText} >
+                Signup
+            </Text>
+            <Text style={styles.subtitleText}>
+                Instant access to see your notes!
+            </Text>
+            <CustomInput
+                type="First Name"
+            />
+            <CustomInput
+                type="Last Name"
+            />
+            <CustomInput
+                type="Email"
+            />
+            <CustomInput
+                type="Password"
+            />
+            <CustomInput
+                type="Confirm Password"
+            />
 
-                <Text style={{
-                    fontStyle: 'normal', color: 'black', alignSelf: 'center',
-                    fontSize: 40, margin: 40
-                }}>Registration</Text>
-                <Input
-                    hint="firstName"
-                    onText={(t) => { setfName(t) }}
-                />
-                <Input
-                    hint="lastName"
-                    onText={(t) => { setlName(t) }}
-                />
-                <Input
-                    hint="Adress"
-                    onText={(t) => { setAdress(t) }}
-                />
-                <Input
-                    hint="Age"
-                    onText={(t) => { setAge(t) }}
-                />
-                <View style={{ width: '30%', alignSelf: 'flex-end', padding: 20 }}>
+            {/* Button to call a function for Account Creation*/}
+            <CustomButton
+                name="Signup"
+                onPress={() => onSignupPressed()}
+            />
 
-                    <Button
-
-                        onPress={() => onSubmitPressed()}
-                        title='Submit'
-                        color='#3f72c4'
-                    />
-                </View>
-                <View style={{ width: '80%', alignSelf: 'center', padding: 20 }}>
-
-                    <Button
-
-                        onPress={() => onGetProfilePressed()}
-                        title='Get Profile'
-                        color='#3f72c4'
-                    />
-                </View>
-                <View style={{ width: '30%', alignSelf: 'flex-start', padding: 20 }}>
-
-                    <Button
-                    onPress={() => {
-                        props.navigation.navigate("Notes")
-                    }}
-
-                        title='Submit'
-                        color='#3f72c4'
-                    />
-                </View>
-            </View>
-
-        </ScrollView>
+            {/* Text to move back to Login Screen */}
+            <TouchableOpacity
+                style={styles.text}
+                onPress={() => props.navigation.navigate('Login')} >
+                <Text
+                // style={ styles.placeCenter}
+                >
+                    Have an account? Login now
+                </Text>
+            </TouchableOpacity>
+        </View>
     )
 }
 
-export default Signup
+export default Signup;
