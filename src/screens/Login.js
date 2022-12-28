@@ -37,8 +37,7 @@ const Login = (props) => {
     }
 
     return (
-        <View >
-
+        <View style={styles.container} >
             <Text style={styles.titleText}>
                 Hello Again!
             </Text>

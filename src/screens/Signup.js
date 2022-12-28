@@ -57,7 +57,7 @@ const Signup = (props) => {
 
 
     return (
-        <View>
+        <View style={styles.container} >
             <Text style={styles.titleText} >
                 Signup
             </Text>

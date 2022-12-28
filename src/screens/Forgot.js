@@ -10,7 +10,7 @@ const Forgot = (props) => {
 
 
     return (
-        <View>
+        <View style={styles.container} >
             <Image
             source={require('../../assets/forgot.jpg')} />
             <Text style = {styles.subtitleText} >

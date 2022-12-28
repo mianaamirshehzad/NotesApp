@@ -27,7 +27,7 @@ const AddNewNote = () => {
     };
 
     return (
-        <View>
+        <View style={styles.container} >
             {/* <View 
             // style = {styles.imageContainer}
             >
