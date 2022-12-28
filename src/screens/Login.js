@@ -32,7 +32,7 @@ const Login = (props) => {
             })
             .catch(error => alert(error.message))
         } catch {
-            alert('Email or Password is incorrect');
+            alert('Email or Password is incorrect. Please retry!');
         }
     }
 
