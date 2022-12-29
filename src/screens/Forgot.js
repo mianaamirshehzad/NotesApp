@@ -19,7 +19,8 @@ const Forgot = (props) => {
             <CustomInput
             type = "Recover password" />
             <CustomButton
-            name = "Send Email" />
+            name = "Send Email"
+            onPress = {() => alert('Reset Email has been sent')} />
         </View>
     )
 }
