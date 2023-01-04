@@ -21,6 +21,8 @@ const Forgot = (props) => {
             <CustomButton
             name = "Send Email"
             onPress = {() => alert('Reset Email has been sent')} />
+            <CustomButton
+            Back to Login />
         </View>
     )
 }
